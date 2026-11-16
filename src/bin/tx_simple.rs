@@ -1,8 +1,8 @@
 //! Transmits one JANUS-encoded frame live through the default audio output.
 //!
 //! Frame layout: 3 up-chirps, the message convolutionally encoded and interleaved (JANUS)
-//! and sent as hop-FSK, then 3 down-chirps, padded with silence on both ends. Played at
-//! 192 kHz on 2 channels. See tx_simple_repeat.rs for a version that loops.
+//! and sent as hop-FSK, then 3 down-chirps, padded with silence on both ends.
+//! kai note: [2nd channel is imaginary!!!!!!]
 use core::f32;
 use std::{thread::sleep, time::Duration};
 
