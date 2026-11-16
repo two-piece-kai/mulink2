@@ -54,7 +54,7 @@ fn mean_power(sig: &Signal<f32>) -> f64 {
     sig.iter().map(|v| v.norm_sqr() as f64).sum::<f64>() / sig.len().max(1) as f64
 }
 
-/// Peak power (max |x|^2, i.e. max amplitude squared) of a baseband segment.
+/// Peak power (max |x|^2) of a baseband segment.
 fn peak_power(sig: &Signal<f32>) -> f64 {
     sig.iter().map(|v| v.norm_sqr() as f64).fold(0.0, f64::max)
 }
@@ -108,7 +108,7 @@ fn main() -> anyhow::Result<()> {
     let mut history = HistoryBuffer::<f32>::new(fs_bb, 60.0);
 
     // Expected frame size, from the fixed message length.
-    let n_bits = 16 * (args.msg_len + 1); // 8 bits/byte + 8 flush bits, rate-1/2 code
+    let n_bits = 16 * (args.msg_len + 1); // 8 bits/byte + 8 flush bits
     let data_len = n_bits as f64 * symbol_len;
 
     let postamble_len = preamble_len;
