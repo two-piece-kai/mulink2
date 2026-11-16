@@ -39,7 +39,7 @@ fn main() -> anyhow::Result<()> {
     let window_chips = true;
     let args = TxArgs::parse();
     trace!("Transmitting with args: {args:?}");
-    // Encoded output is one bit per byte: 16 * (bytes + 1) bits (rate-1/2 code plus flush bits).
+    // Encoded output is one bit per byte: 16 * (bytes + 1) bits
     let msg = janus_encode_bytes(args.msg.as_bytes());
     let fs = 192000.0;
 
@@ -55,7 +55,7 @@ fn main() -> anyhow::Result<()> {
 
     let mut signal = RealSignal::<f32>::new(fs);
 
-    // Pre-build the two symbols for every hop so the data loop just copies them in.
+    // Pre-build the two symbols for every hop so the data loop copies them in
     let mut chip_bank = Vec::<(RealSignal<f32>, RealSignal<f32>)>::new();
 
     for hop in hop_tab.tab.iter() {
