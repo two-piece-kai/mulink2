@@ -1,15 +1,7 @@
 //! Offline decoder for baseband recordings of JANUS-encoded hop-FSK frames (HiFiBerry
 //! receiver).
 //!
-//! Expects the 24 kHz complex baseband WAVs that rx_simple logs, so there is no
-//! down-conversion step. Frames are found by pairing a 3 up-chirp preamble with the
-//! 3 down-chirp postamble after it; the message length comes from the gap between them.
-//! Uses 10 ms symbols and the original fixed-timing preamble detector.
-//!
-//! Output:
-//! - `asa_logs/<file>.csv`, one row per frame of the expected length (time, sync SNR,
-//!   symbol certainty, BER against the known test message)
-//! - preamble diagnostic plots and a spectrogram of the last 60 s, in `plot/`
+//! I don't know if i changed this one correctly aha - kai
 use core::f32;
 use std::{collections::VecDeque, fs::create_dir_all, path::Path};
 
