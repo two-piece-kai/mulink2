@@ -41,7 +41,7 @@ fn main() -> anyhow::Result<()> {
     // Taper each tone's edges to reduce spectral splatter between symbols.
     let window_chips = true;
     let args = TxArgs::parse();
-    // Encoded output is one bit per byte: 16 * (bytes + 1) bits (rate-1/2 code plus flush bits).
+    // Encoded output is one bit per byte: 16 * (bytes + 1) bits
     let msg = janus_encode_bytes(args.msg.as_bytes());
     let fs = 192000.0;
 
@@ -109,7 +109,7 @@ fn main() -> anyhow::Result<()> {
         chip_bank.push((s0, s1));
     }
 
-    // Sync chirps sweep the same 65-75 kHz band as the data.
+    // Sync chirps sweep the 65-75 kHz band
     let chirp_up =
         RealSignal::<f32>::chirp_real(fs, (fs * chirp_len).round() as usize, 65000.0, 75000.0);
 
@@ -151,7 +151,7 @@ fn main() -> anyhow::Result<()> {
     //let len = signal.len() as f64 / fs;
     // Queue a copy of the frame, then wait. The interval should be longer than the frame
     // itself, otherwise frames pile up in the playback queue. The loop never ends, so there is
-    // no Ok(()) after it; stop the program with Ctrl+C.
+    // no Ok(()) after it; stop the program with Ctrl+C.... aha. very normal
     loop {
         sender.send(signal.clone()).unwrap();
         sleep(Duration::from_millis((args.interval_s * 1000.0) as u64));
