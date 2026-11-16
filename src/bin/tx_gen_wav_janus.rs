@@ -45,7 +45,7 @@ pub struct TxArgs {
 fn main() -> anyhow::Result<()> {
     init_tracing()?;
     let args = TxArgs::parse();
-    // Encoded output is one bit per byte: 16 * (bytes + 1) bits (rate-1/2 code plus flush bits).
+    // Encoded output is one bit per byte: 16 * (bytes + 1) bits
     let msg = janus_encode_bytes(args.msg.as_bytes());
     let fs = args.fs;
     let symbol_len = args.symbol_len;
@@ -77,7 +77,7 @@ fn main() -> anyhow::Result<()> {
         let window = RealSignal::from_vec(fs, window);
         chip_bank.push((&s0 * &window, &s1 * &window));
     }
-    // Sync chirps sweep the same 65-75 kHz band as the data.
+    // Sync chirps sweep the 65-75 kHz band
     let chirp_up =
         RealSignal::<f32>::chirp_real(fs, (fs * chirp_len).round() as usize, 65000.0, 75000.0);
     let chirp_down =
